@@ -1,0 +1,30 @@
+-   model: auth.user
+    pk: 1
+    fields:
+        password: pbkdf2_sha256$36000$GDcgZy3mvdJA$c00O20U+jT1dc5VuhPcR2Co8j/oKa9kxQO8K/v/eyMs=
+        last_login: 2018-11-16 21:34:22.242284+00:00
+        is_superuser: true
+        username: alex
+        first_name: ''
+        last_name: ''
+        email: alexandrosm77@gmail.com
+        is_staff: true
+        is_active: true
+        date_joined: 2018-11-16 19:58:21.151747+00:00
+        groups: []
+        user_permissions: []
+-   model: auth.user
+    pk: 2
+    fields:
+        password: pbkdf2_sha256$36000$GIBYf7HdDRxr$23Yw2elWcqKnU4kq4euzvqBuPqfdDj6GMr1w1JYt4pE=
+        last_login: 2018-11-16 20:13:01.747933+00:00
+        is_superuser: false
+        username: bob
+        first_name: ''
+        last_name: ''
+        email: bob@bob.bob
+        is_staff: false
+        is_active: true
+        date_joined: 2018-11-16 20:12:09.821788+00:00
+        groups: []
+        user_permissions: []

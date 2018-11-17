@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
-import os
+import os, sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,12 +20,61 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'CHANGE_ME'
+SECRET_KEY = 'lkadjsnkjdakjmncx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool( os.environ.get('DJANGO_DEBUG', False) )
 
 ALLOWED_HOSTS = ['*']
+
+"""
+LOGGING = {
+    'version': 1,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        '': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+    }
+}
+"""
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s %(levelname)-8s %(message)s'
+        },
+    },
+    'handlers': {
+        # this is what you see in runserver console
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard',
+        },
+    },
+    'loggers': {
+        # django logger
+        'django': {
+            'handlers': ['console'],  
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),  # choose verbosity
+        },
+    },
+    '': {
+        'django': {
+            'handlers': ['console'],  
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),  # choose verbosity
+        },
+    },
+}
 
 
 # Application definition
@@ -121,3 +170,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+
+FIXTURE_DIRS = (
+   '/path/to/myapp/fixtures/',
+)
