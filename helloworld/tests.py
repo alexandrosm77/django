@@ -1,7 +1,7 @@
 from django.test import TestCase, RequestFactory
 from helloworld.views import HomePageView
 from django.contrib.auth.models import User
-from models import Task
+from helloworld.models import Task
 
 class HelloWorldTestCase(TestCase):
     fixtures = ['helloworld.yaml', 'users.yaml']

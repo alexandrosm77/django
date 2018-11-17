@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect, HttpResponseNotFound, Http404
 from django.core.urlresolvers import reverse_lazy
 from .forms import TaskForm
 
-from models import Task
+from helloworld.models import Task
 
 import logging
 
