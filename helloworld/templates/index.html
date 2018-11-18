@@ -2,44 +2,51 @@
 
 {% block content %}
     <h2>Task List</h2>
-    <p>All tasks</p>
-
-    <br><br>
     <table>
-    <td>Name</td>
-    <td>Description</td>
-    <td>Created</td>
-    <td>Todo</td>
-    <td>User</td>
-    <td>Delete</td>
-    {% for task in task_list %}
-    <tr>
-        <td>
-            {% if user == task.user %}
-                <a href="{% url 'task_edit' uuid=task.uuid %}">{{ task.name }}</a>
-            {% else %}
-                {{ task.name }}
-            {% endif %}
-        </td>
-        <td>{{ task.description}}</td>
-        <td>{{ task.created }}</td>
-        <td>
-            {% if task.status %}
-                Done
-            {% else %}
-                <a href="{% url 'task_mark' uuid=task.uuid %}">Mark done</a>
-            {% endif %}
-        </td>
-        <td>{{ task.user.username }}</td>
-        <td>
-            {% if user == task.user %}
-                <a href="{% url 'task_delete' uuid=task.uuid %}">Delete</a>
-            {% endif %}
-        </td>
-    </tr>
-    {% endfor %}
+        <strong>
+        <td>Name</td>
+        <td>Description</td>
+        <td>Created</td>
+        <td>Todo</td>
+        <td>User</td>
+        <td>Delete</td>
+        </strong>
+        {% for task in task_list %}
+        <tr>
+            <td>
+                {% if user == task.user %}
+                    <a href="{% url 'task_edit' uuid=task.uuid %}">{{ task.name }}</a>
+                {% else %}
+                    {{ task.name }}
+                {% endif %}
+            </td>
+            <td>{{ task.description}}</td>
+            <td>{{ task.created }}</td>
+            <td>
+                {% if task.status %}
+                    Done
+                {% else %}
+                    <a href="{% url 'task_mark' uuid=task.uuid %}">Mark done</a>
+                {% endif %}
+            </td>
+            <td>{{ task.user.username }}</td>
+            <td>
+                {% if user == task.user %}
+                    <a href="{% url 'task_delete' uuid=task.uuid %}">Delete</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
     </table>
+    <br>
     <p>
-    <a href="{% url 'task_new' %}">New</a>
+    <a href="{% url 'task_new' %}">[Add new Task]</a>
+    </p>
+    <p>
+    {% if hidemarked %}
+        <a href="{% url 'home' %}">[Show all]</a>
+    {% else %}
+        <a href="{% url 'home' hidemarked='filtermarked' %}">[Hide Done]</a>
+    {% endif %}
     </p>
 {% endblock content %}

@@ -177,3 +177,4 @@ LOGIN_REDIRECT_URL = '/'
 FIXTURE_DIRS = (
    '/path/to/myapp/fixtures/',
 )
+

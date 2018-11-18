@@ -6,6 +6,7 @@ from helloworld import views
 
 urlpatterns = [
     url(r'^$', views.HomePageView.as_view(), name='home'),
+    url(r'^(?P<hidemarked>filtermarked)$', views.HomePageView.as_view(), name='home'),
     url(r'^new$', views.TaskNew.as_view(), name='task_new'),
     url(r'^edit/(?P<uuid>[A-Za-z0-9]+\-[A-Za-z0-9\-]+)$', views.TaskEdit.as_view(), name='task_edit'),
     url(r'^delete/(?P<uuid>[A-Za-z0-9]+\-[A-Za-z0-9\-]+)$', views.TaskDelete.as_view(), name='task_delete'),

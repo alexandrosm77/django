@@ -1,6 +1,6 @@
 """ Views for the application """
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from django.views.generic.edit import UpdateView, CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect, HttpResponseNotFound, Http404
@@ -16,9 +16,21 @@ logging.basicConfig(
     level = logging.DEBUG,
     format = '%(name)s %(levelname)s %(message)s',
 )
-class HomePageView(LoginRequiredMixin, TemplateView):
-    def get(self, request, **kwargs):
-        return render(request, 'index.html', {'task_list': Task.objects.filter(deleted=False)})
+class HomePageView(LoginRequiredMixin, ListView):
+    model = Task
+    context_object_name = 'task_list'
+    template_name = 'index.html'
+
+    def get_queryset(self):
+        args = {'deleted': False}
+        if self.kwargs.get('hidemarked', None):
+            args['status'] = False
+        return Task.objects.filter(**args)
+
+    def get_context_data(self, **kwargs):
+        context = super(HomePageView, self).get_context_data(**kwargs)
+        context['hidemarked'] = self.kwargs.get('hidemarked', None)
+        return context
 
 class TaskNew(LoginRequiredMixin, CreateView):
     form_class = TaskForm 
@@ -62,7 +74,6 @@ class TaskMark(LoginRequiredMixin, TemplateView):
         task_to_mark = Task.objects.filter(uuid=uuid).first()
         if not task_to_mark:
             return HttpResponseNotFound()
-            #return render(request, 'not_found.html', {'uuid': uuid})
         else:
             task_to_mark.done()
             return HttpResponseRedirect('/')
