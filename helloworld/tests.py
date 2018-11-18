@@ -25,7 +25,7 @@ class HelloWorldTestCase(TestCase):
 
         self.assertEqual(response.get('content-type'), 'text/html; charset=utf-8')
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Welcome')
+        self.assertContains(response, 'Task Application')
 
     def test_create_new_task(self):
         """ Test creating a new task saves it in the db """
