@@ -3,10 +3,7 @@ Welcome to the AWS CodeStar sample web application
 
 This application has been bootstrapped using a pre built Django 1.11 template on AWS Codestart
 
-To access the application go to the following link:
-http://djangoapp.eiphmnx3wm.us-east-2.elasticbeanstalk.com/
-
-Alternatively to run the application locally, you need virtualenv installed (https://virtualenv.pypa.io/en/latest/)
+To run the application locally, you need virtualenv installed (https://virtualenv.pypa.io/en/latest/)
 
 1. Create a Python virtual environment for your Django project. This virtual
    environment allows you to isolate this project and install any packages you
